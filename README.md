@@ -25,6 +25,7 @@ The application is built as a single Next.js codebase deployed to Vercel: React 
 
 **Core**
 - **AI PDF summarization** with a selectable length (short / long / academic) and model quality that scales with the user's plan.
+- **Learning workspace** - every document opens in its own workspace with the summary, a chat with the document, key concepts, a quiz, flashcards, important questions, and study notes.
 - **Automatic quiz generation** - multiple-choice self-evaluation questions produced alongside the summary on paid tiers.
 - **Courses** - group multiple summaries into a course, then generate a consolidated final summary, a course-wide quiz, and a printable A4 cheat sheet (formulas, definitions, and key terms extracted from the material).
 - **Summary management** - browse, view, and download generated summaries as PDF.
@@ -145,6 +146,15 @@ Token buckets allow a legitimate burst (a student uploading several chapters bac
 
 ### Upload & summarize
 ![Upload](docs/screenshots/upload.png)
+
+### Generated summary
+![Summary](docs/screenshots/summary.png)
+
+### Key concepts
+![Key concepts](docs/screenshots/key-concepts.png)
+
+### Flashcards
+![Flashcards](docs/screenshots/flashcards.png)
 
 ---
 
