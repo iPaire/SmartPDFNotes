@@ -1,5 +1,10 @@
 # SmartPDFNotes
 
+[![CI](https://github.com/iPaire/PDF-Resumer/actions/workflows/ci.yml/badge.svg)](https://github.com/iPaire/PDF-Resumer/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+![Next.js 15](https://img.shields.io/badge/Next.js-15-black)
+![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6)
+
 Turn long PDFs into structured summaries, self-study quizzes, and printable cheat sheets - an AI study assistant built on Next.js with a multi-provider LLM pipeline.
 
 **Live demo:** https://smartpdfnotes.com
@@ -184,6 +189,25 @@ Most services are required (PostgreSQL, NextAuth, Google OAuth, OpenAI, Stripe, 
 └── docs/
     └── screenshots/        # images used in this README
 ```
+
+---
+
+## Scripts
+
+Run from `client/`:
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start the development server |
+| `npm run typecheck` | Type-check the project (`tsc --noEmit`) |
+| `npm run lint` | Lint with ESLint (`next lint`) |
+| `npm run build` | Generate the Prisma client, sync the schema, and build for production |
+
+---
+
+## License
+
+Released under the [MIT License](LICENSE).
 
 ---
 
