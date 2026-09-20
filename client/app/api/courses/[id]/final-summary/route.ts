@@ -6,7 +6,7 @@ import { createChatCompletion } from "@/lib/ai-client";
 import { checkRateLimit, rateLimitResponse } from "@/lib/rate-limit";
 
 // ===================== POST - Generează rezumatul final =====================
-export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
 
   if (!session?.user) {
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
     return rateLimitResponse(rateLimit) as NextResponse;
   }
 
-  const courseId = params.id;
+  const { id: courseId } = await params;
   const userId = session.user.id;
 
   try {
@@ -106,14 +106,14 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
 }
 
 // ===================== GET - Obține rezumatul final existent =====================
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   
   if (!session?.user) {
     return NextResponse.json({ error: 'Neautorizat' }, { status: 401 });
   }
 
-  const courseId = params.id;
+  const { id: courseId } = await params;
   const userId = session.user.id;
 
   try {
@@ -222,7 +222,7 @@ function extractKeyConceptsByModule(text: string): string {
 }
 
 function extractFormulas(text: string): string {
-  const formulas = [];
+  const formulas: string[] = [];
   const patterns = [
     /\$\$([^$]+)\$\$/g, /\$([^$]+)\$/g,
     /([A-Z][a-z]?\s*=\s*[^.]+)/g, /([a-zA-Z]+\s*=\s*[0-9][^.]*)/g
@@ -238,7 +238,7 @@ function extractFormulas(text: string): string {
 }
 
 function extractDefinitions(text: string): string {
-  const definitions = [];
+  const definitions: string[] = [];
   const lines = text.split('\n');
   lines.forEach(line => {
     if ((line.includes('este') || line.includes('reprezintă') || line.includes('se definește')) && 
@@ -250,7 +250,7 @@ function extractDefinitions(text: string): string {
 }
 
 function extractKeyPoints(text: string): string {
-  const keyPoints = [];
+  const keyPoints: string[] = [];
   const indicators = ['important', 'esențial', 'fundamental', 'crucial', 'principal', 'trebuie', 'necesar', 'cheie', 'vital'];
   const sentences = text.split(/[.!?]+/);
   sentences.forEach(sentence => {
@@ -263,7 +263,7 @@ function extractKeyPoints(text: string): string {
 }
 
 function extractPracticalApplications(text: string): string {
-  const applications = [];
+  const applications: string[] = [];
   const indicators = ['aplicare', 'practică', 'exemplu', 'utilizare', 'implementare', 'folosire', 'aplicație', 'caz', 'situație', 'experiment'];
   const sentences = text.split(/[.!?]+/);
   sentences.forEach(sentence => {
@@ -276,7 +276,7 @@ function extractPracticalApplications(text: string): string {
 }
 
 function extractConclusions(text: string): string {
-  const conclusions = [];
+  const conclusions: string[] = [];
   const indicators = ['concluzie', 'în final', 'prin urmare', 'rezultă că', 'se poate spune', 'în rezumat', 'astfel', 'în consecință'];
   const sentences = text.split(/[.!?]+/);
   sentences.forEach(sentence => {

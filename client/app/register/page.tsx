@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { analyticsEvents } from '@/lib/analytics';
 
+
+import { getErrorMessage } from '@/lib/errors';
 export default function RegisterPage() {
   const t = useTranslations('auth');
   const [name, setName] = useState('');
@@ -82,8 +84,8 @@ export default function RegisterPage() {
       setTimeout(() => {
         router.push('/login');
       }, 2000);
-    } catch (err: any) {
-      setError(err.message || 'Eroare la înregistrare');
+    } catch (err) {
+      setError(getErrorMessage(err) || 'Eroare la înregistrare');
     } finally {
       setLoading(false);
     }

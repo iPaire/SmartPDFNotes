@@ -1,5 +1,6 @@
 // app/api/settings/billing/route.ts
 import { NextRequest, NextResponse } from 'next/server';
+import type Stripe from 'stripe';
 import { stripe } from '@/lib/stripe';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/authOptions';
@@ -10,6 +11,10 @@ export async function GET(req: NextRequest) {
     const session = await getServerSession(authOptions);
     if (!session?.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    if (!stripe) {
+      return NextResponse.json({ error: 'Stripe is not configured' }, { status: 503 });
     }
 
     const customerId = req.nextUrl.searchParams.get('customerId');
@@ -43,7 +48,7 @@ export async function GET(req: NextRequest) {
     }
 
     // Get invoices
-    let invoices = [];
+    let invoices: Stripe.Invoice[] = [];
     try {
       const invoiceResponse = await stripe.invoices.list({
         customer: customerId,
@@ -58,8 +63,8 @@ export async function GET(req: NextRequest) {
       subscription,
       invoices
     });
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error fetching billing data:', error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: error instanceof Error ? error.message : 'Unknown error' }, { status: 500 });
   }
 }

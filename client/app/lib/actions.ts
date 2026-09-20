@@ -4,7 +4,7 @@
 import prisma from '@/lib/prisma';
 import bcrypt from 'bcrypt';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/api/auth/[...nextauth]/route';
+import { authOptions } from '@/lib/authOptions';
 
 export async function updateProfile(data: { name: string; email: string }) {
   const session = await getServerSession(authOptions);

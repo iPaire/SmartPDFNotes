@@ -6,7 +6,7 @@ import { checkRateLimit, rateLimitResponse } from "@/lib/rate-limit";
 import { generateRelevantFormulas, generateKeyDefinitions, getFormulaGenerationPrompt, getDefinitionsGenerationPrompt, parseFormulasFromAIResponse, parseDefinitionsFromAIResponse } from '@/ai-functions';
 
 // POST - Generate printable cheat sheet
-export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   
   if (!session?.user) {
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
     return rateLimitResponse(rateLimit) as NextResponse;
   }
 
-  const courseId = params.id;
+  const { id: courseId } = await params;
   const userId = session.user.id;
 
   try {
@@ -99,14 +99,14 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
 }
 
 // GET - Get existing cheat sheets
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   
   if (!session?.user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const courseId = params.id;
+  const { id: courseId } = await params;
   const userId = session.user.id;
 
   try {
@@ -148,14 +148,14 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 }
 
 // DELETE - Delete a cheat sheet
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   
   if (!session?.user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const courseId = params.id;
+  const { id: courseId } = await params;
   const userId = session.user.id;
   const { cheatSheetId } = await req.json();
 

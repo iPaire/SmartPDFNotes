@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 
+
+import { getErrorMessage } from '@/lib/errors';
 export default function ResetPasswordVerifyPage() {
   const [email, setEmail] = useState('');
   const [token, setToken] = useState('');
@@ -28,8 +30,8 @@ export default function ResetPasswordVerifyPage() {
       if (!res.ok) throw new Error(data.error || 'Eroare');
 
       setStatus('Parola a fost resetată cu succes!');
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      setError(getErrorMessage(err));
     } finally {
       setLoading(false);
     }

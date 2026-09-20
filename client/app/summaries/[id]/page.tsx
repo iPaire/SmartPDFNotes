@@ -451,7 +451,7 @@ export default function SummaryDetailPage({ params }: { params: Promise<{ id: st
                             const containsFormulaKeywords = /Formulă:|Formula:|Formule:|Formel:/i.test(text);
 
                             // Function to convert common notation to LaTeX
-                            const convertToLatex = (text) => {
+                            const convertToLatex = (text: string) => {
                               return text
                                 // Convert subscripts: A_1 -> A_{1}
                                 .replace(/([A-Za-z]+)_([A-Za-z0-9]+)/g, '$1_{$2}')
@@ -472,7 +472,7 @@ export default function SummaryDetailPage({ params }: { params: Promise<{ id: st
                             };
 
                             // Enhanced text processing for fallback display
-                            const processFormulaText = (text) => {
+                            const processFormulaText = (text: string) => {
                               return text
                                 // Replace multiplication symbols
                                 .replace(/\*/g, '×')

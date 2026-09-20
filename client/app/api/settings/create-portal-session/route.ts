@@ -5,6 +5,8 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/authOptions';
 import prisma from '@/lib/prisma';
 
+
+import { getErrorMessage } from '@/lib/errors';
 export async function POST(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
@@ -44,8 +46,8 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ url: portalSession.url });
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error creating portal session:', error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: getErrorMessage(error, 'Unknown error') }, { status: 500 });
   }
 }

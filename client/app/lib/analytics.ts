@@ -101,6 +101,7 @@ export const analyticsEvents = {
           item_id: plan,
           item_name: `${plan} Subscription`,
           category: 'subscription',
+          quantity: 1,
           price: price,
         }],
       });

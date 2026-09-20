@@ -1,8 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 
-declare global {
-  var prisma: PrismaClient | undefined
-}
+const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient }
 
 /**
  * Supabase's transaction-mode pooler (port 6543) multiplexes many clients
@@ -17,11 +15,11 @@ function runtimeDatabaseUrl(): string | undefined {
   return `${url}${url.includes('?') ? '&' : '?'}pgbouncer=true&connection_limit=1`;
 }
 
-const prisma = global.prisma || new PrismaClient({
+const prisma = globalForPrisma.prisma || new PrismaClient({
   datasources: { db: { url: runtimeDatabaseUrl() } },
   log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error']
 })
 
-if (process.env.NODE_ENV !== 'production') global.prisma = prisma
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
 
 export default prisma

@@ -1,6 +1,7 @@
 // Server-side analytics logging utility
 // This helps track conversions even when client-side tracking fails
 
+import { Prisma } from '@prisma/client';
 import prisma from './prisma';
 
 export interface AnalyticsEvent {
@@ -9,7 +10,7 @@ export interface AnalyticsEvent {
   eventCategory: string;
   eventLabel?: string;
   eventValue?: number;
-  metadata?: Record<string, any>;
+  metadata?: Prisma.InputJsonObject;
 }
 
 export async function logAnalyticsEvent(event: AnalyticsEvent) {
@@ -89,7 +90,7 @@ export async function logCheckoutAbandoned(userId: string, plan?: string) {
 // Get analytics summary
 export async function getAnalyticsSummary(startDate?: Date, endDate?: Date) {
   try {
-    const whereClause: any = {};
+    const whereClause: Prisma.AnalyticsLogWhereInput = {};
 
     if (startDate || endDate) {
       whereClause.timestamp = {};

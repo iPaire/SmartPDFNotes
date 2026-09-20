@@ -10,6 +10,7 @@
 // implementation (referenced a non-existent config and used the wrong auth header).
 import OpenAI from 'openai';
 import Anthropic from '@anthropic-ai/sdk';
+import { getErrorMessage } from '@/lib/errors';
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! });
 
@@ -53,8 +54,10 @@ export interface ChatCompletionResult {
   model: string;
 }
 
-function isRetryable(error: any): boolean {
-  const status = error?.status ?? error?.response?.status;
+function isRetryable(error: unknown): boolean {
+  const e = error as { status?: number; response?: { status?: number } } | null | undefined;
+  const status = e?.status ?? e?.response?.status;
+  if (status === undefined) return true;
   if (status === 429 || (status >= 500 && status < 600)) return true;
   // network-level failures (no HTTP status)
   return status === undefined;
@@ -147,8 +150,8 @@ export async function createChatCompletion(req: ChatCompletionRequest): Promise<
     try {
       const content = await withRetries(`openai/${model}`, () => callOpenAI(req, model));
       return { content, provider: 'openai', model };
-    } catch (error: any) {
-      errors.push(`openai/${model}: ${error?.message ?? error}`);
+    } catch (error) {
+      errors.push(`openai/${model}: ${getErrorMessage(error, String(error))}`);
       console.error(`[ai-client] OpenAI model ${model} exhausted retries`, error);
     }
   }
@@ -157,8 +160,8 @@ export async function createChatCompletion(req: ChatCompletionRequest): Promise<
     try {
       const content = await withRetries('anthropic', () => callAnthropic(req));
       return { content, provider: 'anthropic', model: ANTHROPIC_FALLBACK_MODEL };
-    } catch (error: any) {
-      errors.push(`anthropic/${ANTHROPIC_FALLBACK_MODEL}: ${error?.message ?? error}`);
+    } catch (error) {
+      errors.push(`anthropic/${ANTHROPIC_FALLBACK_MODEL}: ${getErrorMessage(error, String(error))}`);
       console.error('[ai-client] Anthropic fallback exhausted retries', error);
     }
   }

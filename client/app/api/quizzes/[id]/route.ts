@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/authOptions";
 import prisma from "@/lib/prisma";
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
 
   if (!session?.user) {
@@ -13,7 +13,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     });
   }
 
-  const quizId = params.id;
+  const { id: quizId } = await params;
 
   try {
     // Mai întâi verificăm dacă este un quiz din tabela Quiz
@@ -73,7 +73,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
 
@@ -81,7 +81,7 @@ export async function DELETE(
     return NextResponse.json({ error: 'Neautorizat' }, { status: 401 });
   }
 
-  const quizId = params.id;
+  const { id: quizId } = await params;
   const userId = session.user.id;
 
   try {

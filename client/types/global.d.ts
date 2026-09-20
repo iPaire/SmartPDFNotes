@@ -1,3 +1,4 @@
+import "react";
 // Global type declarations
 
 declare global {
@@ -30,3 +31,11 @@ declare global {
 }
 
 export {};
+
+// Enable the styled-jsx `<style jsx global>` attributes on <style>
+declare module "react" {
+  interface StyleHTMLAttributes<T> extends HTMLAttributes<T> {
+    jsx?: boolean;
+    global?: boolean;
+  }
+}

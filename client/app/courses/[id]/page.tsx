@@ -32,7 +32,7 @@ type Course = {
   createdAt: string;
   updatedAt: string;
   summaries: Summary[];
-  files: any[];
+  files: CourseFile[];
 };
 
 type FinalSummary = {
@@ -49,9 +49,40 @@ type CheatSheet = {
   createdAt: string;
 };
 
+type CourseFile = {
+  id: string;
+  name: string;
+  createdAt: string;
+};
+
+type QuizQuestion = {
+  question: string;
+  options: string[];
+};
+
+type QuizResult = {
+  question: string;
+  options: string[];
+  userAnswer: number;
+  correctAnswer: number;
+  isCorrect: boolean;
+  explanation?: string;
+};
+
+type QuizResults = {
+  results: QuizResult[];
+  summary: {
+    correctAnswers: number;
+    totalQuestions: number;
+    percentage: number;
+    grade: string;
+    feedback: string;
+  };
+};
+
 type Quiz = {
   id: string;
-  content: any[];
+  content: QuizQuestion[];
   createdAt: string;
 };
 
@@ -113,7 +144,7 @@ export default function CoursePage() {
 
   // Quiz states
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, number[]>>({});
-  const [quizResults, setQuizResults] = useState<any>(null);
+  const [quizResults, setQuizResults] = useState<QuizResults | null>(null);
   const [isSubmittingQuiz, setIsSubmittingQuiz] = useState(false);
 
   // Helper function to get summary display name
@@ -1177,7 +1208,7 @@ export default function CoursePage() {
                             </div>
 
                             <div className="space-y-6">
-                              {quizResults.results.map((result: any, index: number) => (
+                              {quizResults.results.map((result, index: number) => (
                                 <div 
                                   key={index} 
                                   className={`p-4 rounded-lg ${
@@ -1239,7 +1270,7 @@ export default function CoursePage() {
                               </span>
                             </div>
                             <div className="bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 rounded-xl p-6">
-                              {quizzes.find(q => q.id === activeQuiz)?.content.map((q: any, index: number) => (
+                              {quizzes.find(q => q.id === activeQuiz)?.content.map((q, index: number) => (
                                 <div key={index} className="mb-8 last:mb-0">
                                   <h3 className="font-semibold text-lg mb-4 flex text-black">
                                     <span className="bg-purple-600 text-white rounded-full h-8 w-8 flex items-center justify-center mr-3">

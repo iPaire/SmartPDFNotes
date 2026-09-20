@@ -41,7 +41,6 @@ export default function QuizPage({ params }: { params: Promise<{ id: string }> }
   const [selectedOptions, setSelectedOptions] = useState<number[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(0);
-  const [lang, setLang] = useState<'en' | 'ro'>('ro');
 
   useEffect(() => {
     if (session) {
@@ -59,9 +58,6 @@ export default function QuizPage({ params }: { params: Promise<{ id: string }> }
         const shuffledQuiz = shuffleArray<QuizQuestion>(data.quiz);
         setQuiz(shuffledQuiz);
         setFileName(data.fileName);
-        // Detect language based on content or default to Romanian
-        const detectedLang = data.language === 'en' ? 'en' : 'ro';
-        setLang(detectedLang);
       } else {
         console.error('Error fetching quiz:', data);
       }

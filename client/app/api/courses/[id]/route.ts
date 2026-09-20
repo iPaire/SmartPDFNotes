@@ -4,14 +4,14 @@ import { authOptions } from "@/lib/authOptions";
 import prisma from "@/lib/prisma";
 
 // GET - Obține detalii curs cu fișiere și rezumate
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   
   if (!session?.user) {
     return NextResponse.json({ error: 'Neautorizat' }, { status: 401 });
   }
 
-  const courseId = params.id;
+  const { id: courseId } = await params;
 
   try {
     // Găsește cursul împreună cu relațiile sale
@@ -85,14 +85,14 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 }
 
 // PUT - Actualizează cursul (titlu, descriere)
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   
   if (!session?.user) {
     return NextResponse.json({ error: 'Neautorizat' }, { status: 401 });
   }
 
-  const courseId = params.id;
+  const { id: courseId } = await params;
 
   try {
     const { title, description } = await req.json();
@@ -141,14 +141,14 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
 }
 
 // DELETE - Șterge cursul
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   
   if (!session?.user) {
     return NextResponse.json({ error: 'Neautorizat' }, { status: 401 });
   }
 
-  const courseId = params.id;
+  const { id: courseId } = await params;
 
   try {
     // Verifică dacă cursul aparține utilizatorului

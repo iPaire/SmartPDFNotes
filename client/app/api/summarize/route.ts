@@ -17,6 +17,7 @@ import { createChatCompletion } from "@/lib/ai-client";
 import { cacheGet, cacheSet, cacheKey } from "@/lib/cache";
 import { checkRateLimit, rateLimitResponse } from "@/lib/rate-limit";
 import { downloadUpload, deleteUpload } from "@/lib/supabase-storage";
+import { getErrorMessage } from '@/lib/errors';
 
 // Distributed (Redis) cache for identical documents - survives cold starts
 // and is shared across serverless instances, unlike the old in-memory Map.
@@ -543,7 +544,7 @@ export async function POST(request: NextRequest) {
       const currentDate = new Date().toLocaleDateString('ro-RO');
       improved = improved.replace(/\[data curentă\]/g, currentDate);
       improved = improved.replace(/\[data generării\]/g, currentDate);
-      improved = improved.replace(/\[nume fisier\]/g, filename);
+      improved = improved.replace(/\[nume fisier\]/g, filename ?? "");
       improved = improved.replace(/\[numar pagini\]/g, numpages.toString());
 
       // Îmbunătățește formatarea titlurilor pentru a fi consistentă
@@ -1153,9 +1154,9 @@ Format JSON:
           console.warn('Quiz generated but has no questions');
           quiz = [];
         }
-      } catch (error: any) {
+      } catch (error) {
         console.error('Eroare generare/parsare quiz:', error);
-        console.error('Error message:', error.message);
+        console.error('Error message:', getErrorMessage(error));
         // Set empty quiz array on error
         quiz = [];
       }
@@ -1242,8 +1243,9 @@ Format JSON:
       { headers: { 'Content-Type': 'application/json' } }
     );
     
-  } catch (error: any) {
-    console.error('Eroare procesare PDF:', error);
+  } catch (err) {
+    console.error('Eroare procesare PDF:', err);
+    const error = err as { message?: string; name?: string; code?: string; status?: number };
 
     let errorMessage = 'Eroare internă la procesarea documentului';
     let status = 500;

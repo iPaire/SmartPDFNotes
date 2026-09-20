@@ -7,7 +7,9 @@ import { useTranslations, useLocale } from 'next-intl';
 import { analyticsEvents } from '@/lib/analytics';
 
 // Mapeo de idiomas a monedas y precios
-const LOCALE_TO_CURRENCY = {
+type Currency = 'usd' | 'ron' | 'eur';
+
+const LOCALE_TO_CURRENCY: Record<string, Currency> = {
   'en': 'usd',
   'ro': 'ron',
   'es': 'eur',
@@ -58,7 +60,7 @@ export default function PricingPage() {
   const tCommon = useTranslations('common');
   const locale = useLocale();
   const [isMobile, setIsMobile] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState(null);
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const { data: session } = useSession();
   const router = useRouter();
 
@@ -88,7 +90,7 @@ export default function PricingPage() {
     return monthsSinceCreation < 2;
   };
 
-  const handleCheckout = async (priceId) => {
+  const handleCheckout = async (priceId: string) => {
     if (!session) {
       router.push('/login');
       return;
@@ -133,7 +135,7 @@ export default function PricingPage() {
       }
     } catch (error) {
       console.error('Checkout error:', error);
-      alert('Eroare: ' + error.message);
+      alert('Eroare: ' + (error instanceof Error ? error.message : String(error)));
     } finally {
       setSelectedPlan(null);
     }
@@ -145,7 +147,7 @@ export default function PricingPage() {
     router.push(session ? '/upload' : '/login');
   };
 
-  const isLoading = (plan) => selectedPlan === plan;
+  const isLoading = (plan: string) => selectedPlan === plan;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-gray-100 py-8 px-4 sm:py-16">

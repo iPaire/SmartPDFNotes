@@ -4,8 +4,8 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/authOptions";
 import prisma from "@/lib/prisma";
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
-  const fileId = params.id;
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const { id: fileId } = await params;
   
   console.log('Download request for ID:', fileId);
 
@@ -34,7 +34,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     console.log('Searching for record with ID:', fileId);
     
     // Încearcă să găsești în tabela File mai întâi
-    let record = await prisma.file.findUnique({
+    let record: { id: string; name: string; summary: string; userId: string } | null = await prisma.file.findUnique({
       where: { id: fileId },
       select: {
         id: true,
@@ -49,7 +49,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     // Dacă nu găsești în File, încearcă în Summary
     if (!record) {
       console.log('Trying Summary table...');
-      record = await prisma.summary.findUnique({
+      const summaryRecord = await prisma.summary.findUnique({
         where: { id: fileId },
         select: {
           id: true,
@@ -59,14 +59,15 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
         }
       });
       
-      console.log('Summary record found:', !!record);
+      console.log('Summary record found:', !!summaryRecord);
       
       // Adaptăm structura pentru a fi compatibilă
-      if (record) {
+      if (summaryRecord) {
         record = {
-          ...record,
-          name: record.title,
-          summary: record.content
+          id: summaryRecord.id,
+          userId: summaryRecord.userId,
+          name: summaryRecord.title,
+          summary: summaryRecord.content
         };
       }
     }

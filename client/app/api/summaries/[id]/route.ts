@@ -84,7 +84,7 @@ function improveFormatting(summary: string, title: string = '', createdAt: Date 
 
 export async function GET(
   req: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
   
@@ -92,7 +92,7 @@ export async function GET(
     return NextResponse.json({ error: 'Neautorizat' }, { status: 401 });
   }
 
-  const summaryId = context.params.id;
+  const { id: summaryId } = await context.params;
   const userId = session.user.id;
 
   try {
@@ -157,7 +157,7 @@ export async function GET(
 
 export async function DELETE(
   request: NextRequest, 
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
   
@@ -165,7 +165,7 @@ export async function DELETE(
     return NextResponse.json({ error: 'Neautorizat' }, { status: 401 });
   }
 
-  const summaryId = params.id;
+  const { id: summaryId } = await params;
   const userId = session.user.id;
 
   try {
@@ -208,7 +208,7 @@ export async function DELETE(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
   
@@ -216,7 +216,7 @@ export async function PUT(
     return NextResponse.json({ error: 'Neautorizat' }, { status: 401 });
   }
 
-  const summaryId = params.id;
+  const { id: summaryId } = await params;
   const userId = session.user.id;
 
   try {
@@ -269,7 +269,7 @@ export async function PUT(
     }
 
     // Actualizează rezumatul dacă sunt furnizate title sau content
-    const updateData: any = {};
+    const updateData: { title?: string; content?: string } = {};
     if (title !== undefined) updateData.title = title;
     if (content !== undefined) updateData.content = content;
 

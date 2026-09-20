@@ -32,7 +32,7 @@ export async function GET() {
       id: file.id,
       name: file.name,
       createdAt: file.createdAt.toISOString(),
-      quizCount: file.quiz ? (file.quiz as any).length : 0
+      quizCount: file.quiz ? (file.quiz as unknown[]).length : 0
     }));
 
     return new Response(JSON.stringify(formattedFiles), {

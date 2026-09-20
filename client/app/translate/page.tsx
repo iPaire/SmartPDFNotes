@@ -37,6 +37,8 @@ const TARGET_LANGUAGES: { code: string; label: string }[] = [
   { code: 'ko', label: '한국어' },
 ];
 
+
+import { getErrorMessage } from '@/lib/errors';
 export default function TranslatePDF() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isTranslating, setIsTranslating] = useState(false);
@@ -95,8 +97,8 @@ export default function TranslatePDF() {
 
       setTranslatedFile(url);
       setProgress(100);
-    } catch (err: any) {
-      setError(err.message || 'Translation failed. Please try again.');
+    } catch (err) {
+      setError(getErrorMessage(err) || 'Translation failed. Please try again.');
       console.error('Translation error:', err);
       setProgress(0);
     } finally {

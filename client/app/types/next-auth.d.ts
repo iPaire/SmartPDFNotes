@@ -1,12 +1,13 @@
-// types/next-auth.d.ts
 import "next-auth";
 import "next-auth/jwt";
 
 declare module "next-auth" {
   interface User {
     id: string;
-    role?: string;
-    subscription?: string;
+    role?: string | null;
+    subscription?: string | null;
+    trialOffered?: boolean | null;
+    trialExpires?: string | null;
   }
 
   interface Session {
@@ -15,8 +16,12 @@ declare module "next-auth" {
       name?: string | null;
       email?: string | null;
       image?: string | null;
-      role?: string;
-      subscription?: string;
+      role?: string | null;
+      subscription?: string | null;
+      trialOffered?: boolean | null;
+      trialExpires?: string | null;
+      stripeCustomerId?: string | null;
+      createdAt?: string | null;
     };
   }
 }
@@ -24,14 +29,9 @@ declare module "next-auth" {
 declare module "next-auth/jwt" {
   interface JWT {
     id: string;
-    role?: string;
-    subscription?: string;
+    role?: string | null;
+    subscription?: string | null;
+    trialOffered?: boolean | null;
+    trialExpires?: string | null;
   }
 }
-
-// types/fileTypes.ts
-import { Prisma } from '@prisma/client';
-
-export type FileCreateInputWithQuiz = Omit<Prisma.FileCreateInput, 'quiz'> & {
-  quiz?: Prisma.InputJsonValue;
-};

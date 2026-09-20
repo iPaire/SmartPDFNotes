@@ -5,14 +5,14 @@ import { authOptions } from "@/lib/authOptions";
 import prisma from "@/lib/prisma";
 
 // PUT - Adaugă rezumate la curs
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   
   if (!session?.user) {
     return NextResponse.json({ error: 'Neautorizat' }, { status: 401 });
   }
 
-  const courseId = params.id;
+  const { id: courseId } = await params;
   const userId = session.user.id;
   console.log('User ID:', userId);
   console.log('Course ID:', courseId);
@@ -112,14 +112,14 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
 }
 
 // GET - Obține toate rezumatele unui curs
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   
   if (!session?.user) {
     return NextResponse.json({ error: 'Neautorizat' }, { status: 401 });
   }
 
-  const courseId = params.id;
+  const { id: courseId } = await params;
   const userId = session.user.id;
 
   try {
@@ -180,14 +180,14 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 }
 
 // DELETE - Elimină un rezumat din curs
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   
   if (!session?.user) {
     return NextResponse.json({ error: 'Neautorizat' }, { status: 401 });
   }
 
-  const courseId = params.id;
+  const { id: courseId } = await params;
   const userId = session.user.id;
 
   try {

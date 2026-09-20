@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
+
+import { getErrorMessage } from '@/lib/errors';
 export default function ResetPasswordPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -47,8 +49,8 @@ export default function ResetPasswordPage() {
 
       setSuccess(t('verificationCodeSent'));
       setStep(2);
-    } catch (err: any) {
-      setError(err.message || t('sendCodeError'));
+    } catch (err) {
+      setError(getErrorMessage(err) || t('sendCodeError'));
     } finally {
       setLoading(false);
     }
@@ -82,8 +84,8 @@ export default function ResetPasswordPage() {
 
       setSuccess(t('codeVerifiedSuccessfully'));
       setStep(3);
-    } catch (err: any) {
-      setError(err.message || t('codeVerificationError'));
+    } catch (err) {
+      setError(getErrorMessage(err) || t('codeVerificationError'));
     } finally {
       setLoading(false);
     }
@@ -125,8 +127,8 @@ export default function ResetPasswordPage() {
       setTimeout(() => {
         router.push('/login');
       }, 2000);
-    } catch (err: any) {
-      setError(err.message || t('passwordResetError'));
+    } catch (err) {
+      setError(getErrorMessage(err) || t('passwordResetError'));
     } finally {
       setLoading(false);
     }

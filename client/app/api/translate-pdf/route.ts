@@ -460,7 +460,7 @@ async function translateChunk(chunk: string, targetLang: string): Promise<string
 
   // Extract translated text from response
   const translated = data[0]
-    .map((item: any) => item[0])
+    .map((item: string[]) => item[0])
     .join('');
 
   return translated;
@@ -607,7 +607,7 @@ async function createPdfWithTextAndImages(
       });
     }
 
-    let startY = pageIndex === 0 ? pageHeight - margin - 60 : pageHeight - margin - 20;
+    const startY = pageIndex === 0 ? pageHeight - margin - 60 : pageHeight - margin - 20;
 
     const startLine = pageIndex * linesPerPage;
     const endLine = Math.min(startLine + linesPerPage, allLines.length);

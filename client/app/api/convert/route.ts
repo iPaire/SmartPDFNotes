@@ -321,7 +321,7 @@ async function addTextToPdf(pdfDoc: PDFDocument, text: string, fileName: string)
     }
     
     // Calculăm poziția de start pentru text
-    let startY = pageIndex === 0 ? pageHeight - margin - 50 : pageHeight - margin - 20;
+    const startY = pageIndex === 0 ? pageHeight - margin - 50 : pageHeight - margin - 20;
     
     // Adăugăm textul pentru această pagină
     const startLine = pageIndex * linesPerPage;

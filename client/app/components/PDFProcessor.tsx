@@ -29,6 +29,8 @@ import MarkdownContent from './MarkdownContent';
 import { Button, Card, CardBody, Badge } from '@/components/ui';
 import { analyticsEvents } from '@/lib/analytics';
 
+
+import { getErrorMessage } from '@/lib/errors';
 const parseJSON = async (response: Response) => {
   const text = await response.text();
   try {
@@ -240,20 +242,21 @@ export default function PDFProcessor() {
         setError(t('noSummary'));
         analyticsEvents.pdfProcessingFailed('no_summary_generated');
       }
-    } catch (err: any) {
+    } catch (err) {
       console.error('PDF processing error:', err);
-
+      const message = getErrorMessage(err);
+      
       // Track processing failure
-      analyticsEvents.pdfProcessingFailed(err.message || 'unknown_error');
-
-      let userMessage = err.message || 'Unknown processing error';
-
-      if (err.message.includes('Failed to fetch')) {
+      analyticsEvents.pdfProcessingFailed(message || 'unknown_error');
+      
+      let userMessage = message || 'Unknown processing error';
+      
+      if (message.includes('Failed to fetch')) {
         userMessage = t('connectionFailed');
-      } else if (err.message.includes('Internal server error')) {
+      } else if (message.includes('Internal server error')) {
         userMessage = t('serverError');
-      } else if (err.message.includes('monthly limit')) {
-        userMessage = err.message;
+      } else if (message.includes('monthly limit')) {
+        userMessage = message;
       }
 
       setError(userMessage);
