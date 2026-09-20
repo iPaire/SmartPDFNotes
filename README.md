@@ -7,6 +7,10 @@
 
 Turn long PDFs into structured summaries, self-study quizzes, and printable cheat sheets - an AI study assistant built on Next.js with a multi-provider LLM pipeline.
 
+**Live demo:** https://smartpdfnotes-git-main-ipaires-projects.vercel.app
+
+> Email/password sign-up works on the demo. Google sign-in is disabled there (no OAuth credentials configured), and the demo may be slow or paused while its free-tier database is idle.
+
 ---
 
 ## Overview
@@ -31,7 +35,7 @@ The application is built as a single Next.js codebase deployed to Vercel: React 
 - **PDF translation** - extract a PDF's text, translate it, and rebuild the document.
 
 **Platform**
-- **Authentication** - email/password (bcrypt) and Google OAuth via NextAuth with JWT sessions.
+- **Authentication** - email/password (bcrypt) and optional Google OAuth via NextAuth with JWT sessions.
 - **Subscription billing** - Stripe Checkout with free / trial / standard / premium tiers, multi-currency pricing (USD / EUR / RON), monthly and annual plans, and a self-service customer portal.
 - **Usage quotas & free trial** - per-plan monthly limits enforced server-side, plus a time-limited trial.
 - **Internationalization** - UI in five languages (English, Romanian, German, Spanish, French) with automatic locale detection, and automatic content-language detection for summaries.
@@ -166,7 +170,7 @@ cd client
 cp .env.example .env
 ```
 
-Most services are required (PostgreSQL, NextAuth, Google OAuth, OpenAI, Stripe, Resend), but the app degrades gracefully without the optional ones: without Upstash Redis it falls back to in-memory caching and rate limiting, and without `ANTHROPIC_API_KEY` the pipeline runs on OpenAI alone.
+Most services are required (PostgreSQL, NextAuth, OpenAI, Stripe, Resend), but the app degrades gracefully without the optional ones: without Google OAuth the Google button is hidden, without Upstash Redis it falls back to in-memory caching and rate limiting, and without `ANTHROPIC_API_KEY` the pipeline runs on OpenAI alone.
 
 ---
 
