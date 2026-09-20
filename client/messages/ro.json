@@ -49,7 +49,7 @@
     "tools": "Instrumente",
     "translatePdf": "Traduce PDF",
     "freeTools": "Unelte gratuite",
-    "noAccountNeeded": "Gratuit — fără cont",
+    "noAccountNeeded": "Gratuit - fără cont",
     "translatePdfDescription": "Traduce orice PDF în engleză, păstrând formulele și aspectul",
     "menu": "Meniu",
     "notifications": "Notificări",
@@ -387,7 +387,7 @@
     "heroSubtitle": "AI-ul îți citește documentul și îl transformă în rezumat, tutore de chat, flashcarduri, quizuri și altele.",
     "whatYouGet": "Spațiul tău de învățare va include:",
     "processingNoticeTitle": "Nu trebuie să aștepți aici",
-    "processingNotice": "Procesarea continuă în fundal — poți explora aplicația liniștit sau chiar să închizi pagina. Rezumatul va apărea în Biblioteca ta imediat ce e gata.",
+    "processingNotice": "Procesarea continuă în fundal - poți explora aplicația liniștit sau chiar să închizi pagina. Rezumatul va apărea în Biblioteca ta imediat ce e gata.",
     "processingNoticeLink": "Mergi la Bibliotecă"
   },
   "summaries": {
@@ -910,6 +910,6 @@
     "diagramsTitle": "Scheme și figuri din document",
     "diagramsPage": "Pagina {page}",
     "duplicateNoticeTitle": "Ai rezumat deja acest document",
-    "duplicateNotice": "Am găsit un rezumat existent pentru exact acest fișier și ți-am deschis workspace-ul lui — nu s-a creat un duplicat și nu ți s-a consumat din cota lunară."
+    "duplicateNotice": "Am găsit un rezumat existent pentru exact acest fișier și ți-am deschis workspace-ul lui - nu s-a creat un duplicat și nu ți s-a consumat din cota lunară."
   }
 }

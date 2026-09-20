@@ -7,6 +7,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { ChevronDown, Plus, Menu } from 'react-feather';
 import { Badge } from '@/components/ui';
+import type { Tone } from '@/components/ui/Badge';
 import NotificationsBell from '@/components/NotificationsBell';
 import { analyticsEvents } from '@/lib/analytics';
 
@@ -63,7 +64,7 @@ export default function Navbar() {
     );
   }
 
-  const planTone =
+  const planTone: Tone =
     session?.user.subscription === 'free'
       ? 'neutral'
       : session?.user.subscription === 'standard'
@@ -201,7 +202,7 @@ export default function Navbar() {
 
                   <div className="mt-2.5 flex items-center gap-2">
                     <span className="text-xs font-medium text-ink-soft">Plan:</span>
-                    <Badge tone={planTone as any}>{planLabel}</Badge>
+                    <Badge tone={planTone}>{planLabel}</Badge>
                   </div>
 
                   {session.user.subscription === 'trial' && daysLeft !== null && (

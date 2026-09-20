@@ -1,4 +1,4 @@
-type Tone = 'neutral' | 'accent' | 'success' | 'warn' | 'danger' | 'premium';
+export type Tone = 'neutral' | 'accent' | 'success' | 'warn' | 'danger' | 'premium';
 
 const tones: Record<Tone, string> = {
   neutral: 'bg-sunken text-ink-soft',

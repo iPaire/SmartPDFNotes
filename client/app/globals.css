@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /*
- * SmartPDFNotes design tokens — warm consumer evolution of the
+ * SmartPDFNotes design tokens - warm consumer evolution of the
  * convert-to-pdf palette. Tailwind v4 generates utilities from these:
  * bg-canvas, text-ink-soft, border-line, bg-accent-soft, rounded-card,
  * shadow-card, font-sans, etc.

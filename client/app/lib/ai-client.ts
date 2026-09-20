@@ -179,7 +179,7 @@ export async function createChatCompletion(req: ChatCompletionRequest): Promise<
 export async function* createChatCompletionStream(
   req: ChatCompletionRequest
 ): AsyncGenerator<string, void, undefined> {
-  let stream: AsyncIterable<any> | null = null;
+  let stream: AsyncIterable<{ choices: { delta?: { content?: string | null } }[] }> | null = null;
   try {
     stream = await openai.chat.completions.create({
       model: req.model,

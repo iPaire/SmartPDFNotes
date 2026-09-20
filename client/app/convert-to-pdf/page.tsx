@@ -529,7 +529,7 @@ export default function ConvertToPDF() {
             ))}
           </div>
 
-          {/* FAQ — crawlable content mirrored by the FAQPage JSON-LD in layout.tsx */}
+          {/* FAQ - crawlable content mirrored by the FAQPage JSON-LD in layout.tsx */}
           <div style={{ marginTop: 56 }}>
             <h2 style={{ fontSize: 18, fontWeight: 600, letterSpacing: '-0.01em', margin: '0 0 16px' }}>
               {tConvert('faqTitle')}

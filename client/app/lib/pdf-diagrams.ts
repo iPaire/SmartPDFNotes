@@ -72,7 +72,16 @@ async function renderPagesToPng(
 
   const out: { page: number; png: Buffer }[] = [];
   try {
-    const canvasFactory = (doc as any).canvasFactory;
+    const canvasFactory = (
+      doc as unknown as {
+        canvasFactory: {
+          create(width: number, height: number): {
+            canvas: { width: number; height: number; toBuffer(mime: 'image/png'): Buffer };
+            context: CanvasRenderingContext2D;
+          };
+        };
+      }
+    ).canvasFactory;
     for (const pageNumber of pages) {
       if (pageNumber < 1 || pageNumber > doc.numPages) continue;
       // Per-page isolation: one unrenderable page must not lose the rest.

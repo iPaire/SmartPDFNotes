@@ -49,7 +49,7 @@
     "tools": "Tools",
     "translatePdf": "Translate PDF",
     "freeTools": "Free tools",
-    "noAccountNeeded": "Free — no account needed",
+    "noAccountNeeded": "Free - no account needed",
     "translatePdfDescription": "Translate any PDF to English while keeping formulas and layout",
     "menu": "Menu",
     "notifications": "Notifications",
@@ -387,7 +387,7 @@
     "heroSubtitle": "AI reads your document and turns it into a summary, chat tutor, flashcards, quizzes and more.",
     "whatYouGet": "Your learning workspace will include:",
     "processingNoticeTitle": "No need to wait here",
-    "processingNotice": "Processing continues in the background — feel free to browse the app or even close this page. Your summary will appear in your Library as soon as it is ready.",
+    "processingNotice": "Processing continues in the background - feel free to browse the app or even close this page. Your summary will appear in your Library as soon as it is ready.",
     "processingNoticeLink": "Go to Library"
   },
   "summaries": {
@@ -910,6 +910,6 @@
     "diagramsTitle": "Diagrams and figures from the document",
     "diagramsPage": "Page {page}",
     "duplicateNoticeTitle": "You already summarized this document",
-    "duplicateNotice": "We found an existing summary for this exact file and opened its workspace — no duplicate was created and your monthly quota was not used."
+    "duplicateNotice": "We found an existing summary for this exact file and opened its workspace - no duplicate was created and your monthly quota was not used."
   }
 }

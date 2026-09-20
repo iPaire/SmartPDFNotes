@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any -- LLM output is untyped JSON, shape-checked field by field below */
 // lib/ai-workspace.ts - Server-only AI generators for the learning workspace.
 //
 // Every generator goes through createChatCompletion, inheriting the

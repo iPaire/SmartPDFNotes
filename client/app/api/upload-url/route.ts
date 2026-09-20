@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
     const path = `${session.user.id}/${randomUUID()}.pdf`;
     const { signedUrl } = await createSignedUpload(path);
     return NextResponse.json({ path, signedUrl });
-  } catch (error: any) {
+  } catch (error) {
     console.error('[upload-url] failed to create signed upload:', error);
     return NextResponse.json({ error: 'Could not prepare the upload. Please try again.' }, { status: 502 });
   }

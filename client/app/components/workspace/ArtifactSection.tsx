@@ -3,6 +3,7 @@
 // Shared generate-on-demand wrapper for workspace artifact tabs.
 // Handles every lifecycle state: locked (plan), empty (generate CTA),
 // loading, error (retry), rate-limited (countdown) and ready.
+/* eslint-disable @typescript-eslint/no-explicit-any -- artifact payloads vary per type and are validated by each consumer */
 import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Lock, Zap } from 'react-feather';

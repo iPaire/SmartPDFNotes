@@ -19,6 +19,14 @@ import { checkRateLimit, rateLimitResponse } from "@/lib/rate-limit";
 import { downloadUpload, deleteUpload } from "@/lib/supabase-storage";
 import { getErrorMessage } from '@/lib/errors';
 
+// Minimal shape of the pdf.js page object that pdf-parse hands to `pagerender`.
+type PdfPageData = {
+  getTextContent(options: {
+    normalizeWhitespace: boolean;
+    disableCombineTextItems: boolean;
+  }): Promise<{ items: { str: string; transform: number[] }[] }>;
+};
+
 // Distributed (Redis) cache for identical documents - survives cold starts
 // and is shared across serverless instances, unlike the old in-memory Map.
 // The cache is content-addressed (hash of the full document text + settings),
@@ -235,10 +243,10 @@ export async function POST(request: NextRequest) {
 
     try {
       const data = await pdf(Buffer.from(buffer), {
-        pagerender: (pageData: any) =>
+        pagerender: (pageData: PdfPageData) =>
           pageData
             .getTextContent({ normalizeWhitespace: false, disableCombineTextItems: false })
-            .then((textContent: any) => {
+            .then((textContent) => {
               let lastY: number | undefined;
               let pageText = '';
               for (const item of textContent.items) {
@@ -775,7 +783,7 @@ export async function POST(request: NextRequest) {
 STRUCTURE
 - Start with one title line: "# " followed by a short descriptive title based on the document's subject (never the filename).
 - Organize with "## " sections that follow the DOCUMENT'S OWN structure and topics. Do not force a generic template onto it.
-- Bold every important term the first time you define it: **term** — clear definition.
+- Bold every important term the first time you define it: **term** - clear definition.
 - Use bullet lists for enumerations and a markdown table whenever the document compares alternatives.
 
 MATH AND FORMULAS (critical)
@@ -785,14 +793,14 @@ MATH AND FORMULAS (critical)
 - Never write formulas as plain text or inside backticks.
 
 WORKED EXAMPLES (critical)
-- If the document contains worked examples, applications or solved exercises (e.g. "Aplicația 6.1", "Example", "Exercise", "Problem"), reproduce them in a dedicated "## " section for worked examples: state the problem, then the COMPLETE solution — every intermediate calculation step in LaTeX, in order. Never state a numeric result without showing the calculation that produces it. If the document gives the governing formula and the final value, write out the substitution step connecting them (e.g. state the relation, substitute the known values, then the result). A "solution" that jumps straight to the final number is unacceptable.
-- If the document leaves an exercise unsolved (homework), present the problem and say it is left as an exercise — never invent a solution or a numeric answer the document does not contain.
+- If the document contains worked examples, applications or solved exercises (e.g. "Aplicația 6.1", "Example", "Exercise", "Problem"), reproduce them in a dedicated "## " section for worked examples: state the problem, then the COMPLETE solution - every intermediate calculation step in LaTeX, in order. Never state a numeric result without showing the calculation that produces it. If the document gives the governing formula and the final value, write out the substitution step connecting them (e.g. state the relation, substitute the known values, then the result). A "solution" that jumps straight to the final number is unacceptable.
+- If the document leaves an exercise unsolved (homework), present the problem and say it is left as an exercise - never invent a solution or a numeric answer the document does not contain.
 
 FAITHFULNESS (critical)
-- Documents often begin with a table of contents listing chapters whose material is NOT included. Before writing, decide for each chapter: does the provided text contain real paragraphs of material for it, or only its title? If only the title (or a line in a contents list), SKIP that chapter completely — no heading, no one-sentence description, nothing. A summary that covers only the chapters actually present (e.g. starting directly at chapter 6) is CORRECT; padding it with invented one-liners for the other chapters is a serious failure.
+- Documents often begin with a table of contents listing chapters whose material is NOT included. Before writing, decide for each chapter: does the provided text contain real paragraphs of material for it, or only its title? If only the title (or a line in a contents list), SKIP that chapter completely - no heading, no one-sentence description, nothing. A summary that covers only the chapters actually present (e.g. starting directly at chapter 6) is CORRECT; padding it with invented one-liners for the other chapters is a serious failure.
 
 QUALITY
-- Write complete, clear sentences a student can study from — not fragments of the original.
+- Write complete, clear sentences a student can study from - not fragments of the original.
 - No placeholders, no meta-commentary, no mention of these instructions, no invented facts.
 - Skip administrative noise: emails, headers, page numbers, course logistics.`;
 
@@ -847,7 +855,7 @@ SCOPE FOR THIS SUMMARY (${summaryLength === 'short' ? 'premium concise' : summar
 ${summaryLength === 'short'
   ? `- Distill the document to its essence: a tight overview, the core concepts with crisp definitions, the key formulas (LaTeX, variables explained), and the main practical points.
 - End with a "key takeaways" list of 5-7 bullets and a short glossary of the most important terms.`
-  : `- Include: an introduction covering purpose, theoretical context and practical relevance; every fundamental concept, bolded and rigorously defined, including how concepts interrelate; a fully developed section for each chapter/topic of the document — operating principles, ${summaryLength === 'academic' ? 'derivations where the document shows them, ' : ''}advantages and limitations, applications, and concrete numeric values or standards the document mentions; ALL formulas and relations, each displayed in LaTeX with every variable explained; comparison tables wherever the document contrasts types, methods or approaches.
+  : `- Include: an introduction covering purpose, theoretical context and practical relevance; every fundamental concept, bolded and rigorously defined, including how concepts interrelate; a fully developed section for each chapter/topic of the document - operating principles, ${summaryLength === 'academic' ? 'derivations where the document shows them, ' : ''}advantages and limitations, applications, and concrete numeric values or standards the document mentions; ALL formulas and relations, each displayed in LaTeX with every variable explained; comparison tables wherever the document contrasts types, methods or approaches.
 - End with: a "key takeaways" list; an alphabetical glossary of the important technical terms; and a final "## Self-assessment" section with ${summaryLength === 'academic' ? '6-8' : '4-6'} exam-style open questions about this material (questions only, no answers).`}
 
 Maximum length: ${wordLimit}.`
@@ -884,7 +892,7 @@ Maximum length: ${wordLimit}.`
           const systemMessage =
             `You are an expert tutor and technical writer who produces exceptional study summaries. ` +
             `You write in ${targetLanguage}, use clean Markdown, and typeset ALL mathematics in LaTeX ` +
-            `between $ (inline) or $$ (display) delimiters — never as plain text or code spans. ` +
+            `between $ (inline) or $$ (display) delimiters - never as plain text or code spans. ` +
             `You output only the summary itself: no preamble, no placeholders, no meta-commentary.`;
 
           // Fallback chain: primary OpenAI model -> secondary OpenAI model -> Claude

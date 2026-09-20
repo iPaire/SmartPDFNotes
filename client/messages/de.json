@@ -49,7 +49,7 @@
     "tools": "Werkzeuge",
     "translatePdf": "PDF übersetzen",
     "freeTools": "Kostenlose Tools",
-    "noAccountNeeded": "Kostenlos — ohne Konto",
+    "noAccountNeeded": "Kostenlos - ohne Konto",
     "translatePdfDescription": "Übersetze jedes PDF ins Englische, Formeln und Layout bleiben erhalten",
     "menu": "Menü",
     "notifications": "Benachrichtigungen",
@@ -212,7 +212,7 @@
   "homepage": {
     "heroTitle": "Verwandle jedes PDF in",
     "heroHighlight": "deinen persönlichen KI-Tutor",
-    "heroSubtitle": "Lade ein Dokument hoch und erhalte Zusammenfassung, Chat-Tutor, Karteikarten, Quizze, Schlüsselkonzepte und Lernnotizen — alles, was du zum echten Lernen brauchst.",
+    "heroSubtitle": "Lade ein Dokument hoch und erhalte Zusammenfassung, Chat-Tutor, Karteikarten, Quizze, Schlüsselkonzepte und Lernnotizen - alles, was du zum echten Lernen brauchst.",
     "loginBtn": "Anmelden",
     "registerBtn": "Kostenlos lernen starten",
     "dashboardBtn": "Dashboard",
@@ -220,7 +220,7 @@
     "howItWorks": "So funktioniert es",
     "howItWorksSubtitle": "Vom Dokument zum Verständnis in drei Schritten",
     "step1Title": "PDF hochladen",
-    "step1Description": "Vorlesungsnotizen, Lehrbücher, Artikel, Berichte — jedes PDF funktioniert.",
+    "step1Description": "Vorlesungsnotizen, Lehrbücher, Artikel, Berichte - jedes PDF funktioniert.",
     "step2Title": "Die KI versteht es",
     "step2Description": "Die KI liest das gesamte Dokument und baut deinen persönlichen Lernbereich auf.",
     "step3Title": "Mit KI lernen",
@@ -228,12 +228,12 @@
     "featuresTitle": "Ein Upload. Sieben Wege zu lernen.",
     "featuresSubtitle": "Jedes Dokument wird zu einem vollständigen Lernbereich",
     "featureSummaryDesc": "Eine klare, strukturierte Zusammenfassung des gesamten Dokuments.",
-    "featureChatDesc": "Frag alles — die KI antwortet aus deinem Dokument, wie ein Tutor.",
+    "featureChatDesc": "Frag alles - die KI antwortet aus deinem Dokument, wie ein Tutor.",
     "mockChatQuestion": "Was ist das Hauptargument in Kapitel 3?",
     "featureConceptsDesc": "Die wichtigsten Begriffe und Ideen, einfach erklärt.",
     "featureQuizDesc": "Multiple-Choice-Fragen mit Erklärungen zum Selbsttest.",
     "featureFlashcardsDesc": "Karteikarten für schnelles, aktives Wiederholen.",
-    "featureQuestionsDesc": "Die Prüfungsfragen, die ein Professor stellen würde — mit Musterantworten.",
+    "featureQuestionsDesc": "Die Prüfungsfragen, die ein Professor stellen würde - mit Musterantworten.",
     "featureNotesDesc": "Ein kompaktes Wiederholungsblatt aus dem gesamten Dokument.",
     "pricingTeaser": "Starte kostenlos mit 3 Dokumenten pro Monat. Upgrade, wenn du mehr brauchst.",
     "pricingCta": "Preise ansehen"
@@ -387,7 +387,7 @@
     "heroSubtitle": "Die KI liest dein Dokument und verwandelt es in Zusammenfassung, Chat-Tutor, Karteikarten, Quizze und mehr.",
     "whatYouGet": "Dein Lernbereich wird enthalten:",
     "processingNoticeTitle": "Du musst hier nicht warten",
-    "processingNotice": "Die Verarbeitung läuft im Hintergrund weiter — du kannst die App erkunden oder diese Seite sogar schließen. Deine Zusammenfassung erscheint in deiner Bibliothek, sobald sie fertig ist.",
+    "processingNotice": "Die Verarbeitung läuft im Hintergrund weiter - du kannst die App erkunden oder diese Seite sogar schließen. Deine Zusammenfassung erscheint in deiner Bibliothek, sobald sie fertig ist.",
     "processingNoticeLink": "Zur Bibliothek"
   },
   "summaries": {
@@ -910,6 +910,6 @@
     "diagramsTitle": "Diagramme und Abbildungen aus dem Dokument",
     "diagramsPage": "Seite {page}",
     "duplicateNoticeTitle": "Du hast dieses Dokument bereits zusammengefasst",
-    "duplicateNotice": "Wir haben eine vorhandene Zusammenfassung für genau diese Datei gefunden und ihren Lernbereich geöffnet — es wurde kein Duplikat erstellt und dein Monatskontingent nicht verbraucht."
+    "duplicateNotice": "Wir haben eine vorhandene Zusammenfassung für genau diese Datei gefunden und ihren Lernbereich geöffnet - es wurde kein Duplikat erstellt und dein Monatskontingent nicht verbraucht."
   }
 }

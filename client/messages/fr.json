@@ -49,7 +49,7 @@
     "tools": "Outils",
     "translatePdf": "Traduire un PDF",
     "freeTools": "Outils gratuits",
-    "noAccountNeeded": "Gratuit — sans compte",
+    "noAccountNeeded": "Gratuit - sans compte",
     "translatePdfDescription": "Traduisez n'importe quel PDF en anglais en conservant formules et mise en page",
     "menu": "Menu",
     "notifications": "Notifications",
@@ -212,7 +212,7 @@
   "homepage": {
     "heroTitle": "Transformez n'importe quel PDF en",
     "heroHighlight": "votre tuteur IA personnel",
-    "heroSubtitle": "Importez un document et obtenez un résumé, un tuteur de chat, des cartes mémoire, des quiz, des concepts clés et des notes d'étude — tout ce qu'il faut pour vraiment apprendre.",
+    "heroSubtitle": "Importez un document et obtenez un résumé, un tuteur de chat, des cartes mémoire, des quiz, des concepts clés et des notes d'étude - tout ce qu'il faut pour vraiment apprendre.",
     "loginBtn": "Se connecter",
     "registerBtn": "Apprendre gratuitement",
     "dashboardBtn": "Tableau de bord",
@@ -220,7 +220,7 @@
     "howItWorks": "Comment ça marche",
     "howItWorksSubtitle": "Du document à la compréhension en trois étapes",
     "step1Title": "Importez votre PDF",
-    "step1Description": "Notes de cours, manuels, articles, rapports — n'importe quel PDF fonctionne.",
+    "step1Description": "Notes de cours, manuels, articles, rapports - n'importe quel PDF fonctionne.",
     "step2Title": "L'IA le comprend",
     "step2Description": "L'IA lit tout le document et construit votre espace d'apprentissage personnel.",
     "step3Title": "Apprenez avec l'IA",
@@ -228,7 +228,7 @@
     "featuresTitle": "Un import. Sept façons d'apprendre.",
     "featuresSubtitle": "Chaque document devient un espace d'apprentissage complet",
     "featureSummaryDesc": "Un résumé clair et structuré de tout le document.",
-    "featureChatDesc": "Demandez n'importe quoi — l'IA répond à partir de votre document, comme un tuteur.",
+    "featureChatDesc": "Demandez n'importe quoi - l'IA répond à partir de votre document, comme un tuteur.",
     "mockChatQuestion": "Quel est l'argument principal du chapitre 3 ?",
     "featureConceptsDesc": "Les termes et idées essentiels, expliqués simplement.",
     "featureQuizDesc": "Des QCM avec explications pour vous tester.",
@@ -387,7 +387,7 @@
     "heroSubtitle": "L'IA lit votre document et le transforme en résumé, tuteur de chat, cartes mémoire, quiz et plus encore.",
     "whatYouGet": "Votre espace d'apprentissage comprendra :",
     "processingNoticeTitle": "Pas besoin d'attendre ici",
-    "processingNotice": "Le traitement continue en arrière-plan — vous pouvez explorer l'application ou même fermer cette page. Votre résumé apparaîtra dans votre Bibliothèque dès qu'il sera prêt.",
+    "processingNotice": "Le traitement continue en arrière-plan - vous pouvez explorer l'application ou même fermer cette page. Votre résumé apparaîtra dans votre Bibliothèque dès qu'il sera prêt.",
     "processingNoticeLink": "Aller à la Bibliothèque"
   },
   "summaries": {
@@ -910,6 +910,6 @@
     "diagramsTitle": "Schémas et figures du document",
     "diagramsPage": "Page {page}",
     "duplicateNoticeTitle": "Vous avez déjà résumé ce document",
-    "duplicateNotice": "Nous avons trouvé un résumé existant pour ce fichier exact et ouvert son espace de travail — aucun doublon n'a été créé et votre quota mensuel n'a pas été utilisé."
+    "duplicateNotice": "Nous avons trouvé un résumé existant pour ce fichier exact et ouvert son espace de travail - aucun doublon n'a été créé et votre quota mensuel n'a pas été utilisé."
   }
 }

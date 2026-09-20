@@ -143,7 +143,7 @@ export default function MarkdownContent({ content }: { content: string }) {
           const containsFormulaKeywords = /Formulă:|Formula:|Formule:|Formel:/i.test(text);
 
           // Function to convert common notation to LaTeX
-          const convertToLatex = (text) => {
+          const convertToLatex = (text: string) => {
             return text
               // Convert subscripts: A_1 -> A_{1}
               .replace(/([A-Za-z]+)_([A-Za-z0-9]+)/g, '$1_{$2}')
@@ -164,7 +164,7 @@ export default function MarkdownContent({ content }: { content: string }) {
           };
 
           // Enhanced text processing for fallback display
-          const processFormulaText = (text) => {
+          const processFormulaText = (text: string) => {
             return text
               // Replace multiplication symbols
               .replace(/\*/g, '×')
@@ -328,7 +328,7 @@ export default function MarkdownContent({ content }: { content: string }) {
           const hasSubscriptSuperscript = /[A-Za-z_]+[_{][A-Za-z0-9}]+|[A-Za-z_]+\^[A-Za-z0-9]+|[A-Z]+_[A-Z]+/.test(text);
 
           // Process formula text for better display
-          const processFormulaText = (text) => {
+          const processFormulaText = (text: string) => {
             return text
               .replace(/\*/g, '×')
               .replace(/\bx\b/g, '×')

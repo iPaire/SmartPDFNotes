@@ -7,7 +7,7 @@ import { authOptions } from '@/lib/authOptions';
 import prisma from '@/lib/prisma';
 import { createDiagramViewUrls } from '@/lib/supabase-storage';
 import { redirect } from 'next/navigation';
-import WorkspaceShell, { WorkspaceData } from '@/components/workspace/WorkspaceShell';
+import WorkspaceShell, { WorkspaceData, WorkspaceQuizQuestion } from '@/components/workspace/WorkspaceShell';
 
 export default async function WorkspacePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -56,7 +56,7 @@ export default async function WorkspacePage({ params }: { params: Promise<{ id: 
       where: { summaryId_type: { summaryId: summary.id, type: 'diagrams' } },
       select: { content: true },
     });
-    const refs = (diagramsArtifact?.content as any)?.pages as
+    const refs = (diagramsArtifact?.content as { pages?: unknown } | null)?.pages as
       | { page: number; path: string }[]
       | undefined;
     if (Array.isArray(refs) && refs.length > 0) {
@@ -75,7 +75,7 @@ export default async function WorkspacePage({ params }: { params: Promise<{ id: 
     createdAt: summary.createdAt.toISOString(),
     fileName: summary.file?.name ?? null,
     pages: summary.file?.pages ?? null,
-    uploadQuiz: (summary.file?.quiz as any) ?? null,
+    uploadQuiz: (summary.file?.quiz as WorkspaceQuizQuestion[] | null) ?? null,
     hasDocumentText,
     artifacts: summary.artifacts.map((a) => ({ type: a.type, updatedAt: a.updatedAt.toISOString() })),
     chatCount: summary._count.chatMessages,
