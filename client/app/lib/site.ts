@@ -1,6 +1,5 @@
-// Canonical production origin, used for metadataBase, Open Graph URLs, sitemap,
-// and robots. Override with NEXT_PUBLIC_SITE_URL in other environments; falls
-// back to the live domain so absolute SEO URLs are always correct in prod.
+// Site origin, used for metadataBase, Open Graph URLs, sitemap, and robots.
+// Set NEXT_PUBLIC_SITE_URL to the deployed origin; falls back to localhost.
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || 'https://smartpdfnotes.com'
+  process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 ).replace(/\/$/, '');
