@@ -1,6 +1,6 @@
 # SmartPDFNotes
 
-[![CI](https://github.com/iPaire/smartpdfnotes/actions/workflows/ci.yml/badge.svg)](https://github.com/iPaire/smartpdfnotes/actions/workflows/ci.yml)
+[![CI](https://github.com/iPaire/SmartPDFNotes/actions/workflows/ci.yml/badge.svg)](https://github.com/iPaire/SmartPDFNotes/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 ![Next.js 15](https://img.shields.io/badge/Next.js-15-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6)
@@ -149,8 +149,8 @@ Token buckets allow a legitimate burst (a student uploading several chapters bac
 The application lives in the `client/` directory.
 
 ```bash
-git clone https://github.com/iPaire/smartpdfnotes.git
-cd smartpdfnotes/client
+git clone https://github.com/iPaire/SmartPDFNotes.git
+cd SmartPDFNotes/client
 npm install
 npm run dev
 ```
