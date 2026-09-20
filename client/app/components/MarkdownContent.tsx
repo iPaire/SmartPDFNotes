@@ -18,6 +18,7 @@ import 'katex/dist/katex.min.css';
 import 'katex/dist/contrib/copy-tex';
 import { InlineMath, BlockMath } from 'react-katex';
 import { useLocale } from 'next-intl';
+import { repairMathEscapes } from '@/lib/latex';
 
 // Extends the GitHub sanitize schema so the class names remark-math attaches
 // survive sanitization; rehype-katex (which runs after) needs them to find
@@ -356,7 +357,7 @@ export default function MarkdownContent({ content }: { content: string }) {
         },
       }}
     >
-      {content}
+      {repairMathEscapes(content)}
     </ReactMarkdown>
   );
 }
