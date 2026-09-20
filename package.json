@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "@prisma/client": "^6.9.0",
-    "bcrypt": "^6.0.0"
-  },
-  "devDependencies": {
-    "@types/bcrypt": "^5.0.2"
-  }
-}

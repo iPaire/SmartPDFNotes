@@ -4,9 +4,9 @@
 import type { Metadata } from 'next';
 import { SITE_URL } from '@/lib/site';
 
-const TITLE = 'Convert to PDF Online — Free Image, Word & Text to PDF';
+const TITLE = 'Convert to PDF Online - Free Image, Word & Text to PDF';
 const DESCRIPTION =
-  'Convert JPG, PNG, Word (DOCX), and text files to PDF online for free. Fast, browser-based, no signup — drag, drop, and download your PDF in seconds.';
+  'Convert JPG, PNG, Word (DOCX), and text files to PDF online for free. Fast, browser-based, no signup - drag, drop, and download your PDF in seconds.';
 const PATH = '/convert-to-pdf';
 
 export const metadata: Metadata = {
@@ -28,13 +28,13 @@ export const metadata: Metadata = {
     type: 'website',
     url: `${SITE_URL}${PATH}`,
     siteName: 'SmartPDF Notes',
-    title: 'Convert to PDF Online — Free & Fast',
+    title: 'Convert to PDF Online - Free & Fast',
     description:
       'Turn images, Word docs, and text files into a clean PDF in seconds. Free, no signup, no watermarks.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Convert to PDF Online — Free & Fast',
+    title: 'Convert to PDF Online - Free & Fast',
     description:
       'Turn images, Word docs, and text files into a clean PDF in seconds. Free, no signup, no watermarks.',
   },
@@ -51,7 +51,7 @@ const faqJsonLd = {
       name: 'Is this PDF converter free?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes — converting to PDF is completely free, with no watermarks or sign-up required.',
+        text: 'Yes - converting to PDF is completely free, with no watermarks or sign-up required.',
       },
     },
     {
